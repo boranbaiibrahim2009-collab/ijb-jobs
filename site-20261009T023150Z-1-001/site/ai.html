@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JOB AI - IJB Jobs</title>
+    <style>
+        /* --- БАЗОВЫЕ СТИЛИ --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { display: flex; height: 100vh; background-color: #fbf7ef; color: #333; overflow: hidden; }
+
+        /* --- БОКОВАЯ ПАНЕЛЬ (Темно-синяя) --- */
+        .sidebar {
+            width: 230px; 
+            background: linear-gradient(to bottom, #1d334e, #111e30);
+            display: flex; flex-direction: column;
+            padding: 30px 15px; 
+            z-index: 10; 
+            flex-shrink: 0;
+            box-shadow: 2px 0 15px rgba(0,0,0,0.1);
+        }
+        
+        .logo { 
+            margin-bottom: 40px; 
+            padding-left: 10px; 
+            color: #ffffff;
+            font-size: 26px;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-menu { display: flex; flex-direction: column; gap: 8px; margin-bottom: auto; }
+        
+        .nav-link {
+            text-decoration: none; 
+            color: #8f9db3; 
+            font-size: 15px; 
+            padding: 12px 15px;
+            border-radius: 12px; 
+            font-weight: 500; 
+            transition: all 0.3s ease; 
+            display: flex; 
+            align-items: center; 
+            gap: 12px;
+        }
+        
+        .nav-icon { width: 18px; height: 18px; transition: stroke 0.3s ease; }
+
+        .nav-link:hover { background-color: rgba(255, 255, 255, 0.1); color: #ffffff; }
+        
+        .nav-link.active { background-color: #fbf7ef; color: #111e30; font-weight: 600; }
+        
+        .language-switch {
+            padding: 14px 15px; background: transparent; color: #8f9db3; 
+            font-weight: 500; transition: 0.3s ease; font-size: 14px;
+            display: flex; align-items: center; gap: 10px; cursor: pointer;
+        }
+        .language-switch:hover { color: #ffffff; }
+
+        /* --- ОСНОВНАЯ ОБЛАСТЬ (ЧАТ ИИ) --- */
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: #fbf7ef; 
+            height: 100vh;
+        }
+
+        .chat-header {
+            padding: 30px 50px;
+            background-color: transparent;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        .chat-header h1 {
+            font-size: 32px;
+            color: #111;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            margin-bottom: 5px;
+        }
+        .chat-header p {
+            color: #707eae;
+            font-size: 15px;
+        }
+
+        .chat-history {
+            flex-grow: 1;
+            padding: 40px 50px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .message-wrapper { display: flex; width: 100%; }
+        .message-wrapper.bot { justify-content: flex-start; }
+        .message-wrapper.user { justify-content: flex-end; }
+
+        .message-box {
+            max-width: 70%;
+            padding: 18px 24px;
+            border-radius: 20px;
+            font-size: 16px;
+            line-height: 1.5;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        }
+
+        .message-wrapper.bot .message-box {
+            background-color: #ffffff;
+            color: #333;
+            border-bottom-left-radius: 4px;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .message-wrapper.user .message-box {
+            background-color: #2b60f5; 
+            color: #ffffff;
+            border-bottom-right-radius: 4px;
+        }
+
+        .chat-input-container {
+            padding: 20px 50px 40px;
+            background-color: transparent;
+        }
+        
+        .chat-input-box {
+            display: flex;
+            align-items: center;
+            background-color: #ffffff;
+            padding: 10px 10px 10px 25px;
+            border-radius: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .chat-input-box input {
+            flex-grow: 1;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            color: #333;
+            background: transparent;
+        }
+
+        .chat-input-box input::placeholder { color: #a3aed1; }
+
+        .send-btn {
+            background-color: #2b60f5;
+            color: white;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 18px;
+        }
+        .send-btn:hover { background-color: #1a45bd; transform: scale(1.05); }
+    </style>
+</head>
+<body>
+
+    <!-- БОКОВАЯ ПАНЕЛЬ -->
+    <aside class="sidebar">
+        <div class="logo">IJB Jobs</div>
+        
+        <nav class="nav-menu">
+            <a href="home.html" class="nav-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="nav-icon"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                Home
+            </a>
+            
+            <a href="jobs.html" class="nav-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="nav-icon"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                Jobs
+            </a>
+
+            <a href="work.html" class="nav-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="nav-icon"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
+                Work
+            </a>
+            <a href="employer.html" class="nav-link">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="nav-icon"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>
+    Работодателям
+</a>
+            
+            <a href="arcade.html" class="nav-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="nav-icon"><line x1="6" y1="12" x2="10" y2="12"></line><line x1="8" y1="10" x2="8" y2="14"></line><line x1="15" y1="13" x2="15.01" y2="13"></line><line x1="18" y1="11" x2="18.01" y2="11"></line><path d="M2 12a10 10 0 1 0 20 0 10 10 0 0 0-20 0z"></path></svg>
+                Arcade
+            </a>
+            
+            <!-- АКТИВНАЯ ВКЛАДКА: JOB AI -->
+            <a href="ai.html" class="nav-link active">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="nav-icon"><rect x="3" y="11" width="18" height="10" rx="2"></rect><circle cx="12" cy="5" r="2"></circle><path d="M12 7v4"></path><line x1="8" y1="16" x2="8.01" y2="16"></line><line x1="16" y1="16" x2="16.01" y2="16"></line></svg>
+                JOB AI
+            </a>
+        </nav>
+        
+        <div class="language-switch">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="nav-icon"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+            RU / EN
+        </div>
+    </aside>
+
+    <!-- ОСНОВНАЯ ОБЛАСТЬ ЧАТА -->
+    <main class="main-content">
+        
+        <!-- Шапка чата -->
+        <div class="chat-header">
+            <h1>JOB AI</h1>
+            <p>Задайте мне вопрос о поиске работы, составлении резюме или подготовке к собеседованию.</p>
+        </div>
+
+        <!-- История сообщений -->
+        <div class="chat-history" id="chat-history">
+            
+            <div class="message-wrapper bot">
+                <div class="message-box">
+                    Здравствуйте, Alex! 👋 <br><br>
+                    Я <b>JOB AI</b> — ваш умный ассистент на платформе IJB Jobs в Аркалыке. Чем я могу помочь вам сегодня? Вы можете попросить меня:
+                    <ul style="margin-top: 10px; margin-left: 20px; color: #555;">
+                        <li>Подобрать вакансии по вашим навыкам</li>
+                        <li>Оценить ваше резюме</li>
+                        <li>Написать сопроводительное письмо</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="message-wrapper user">
+                <div class="message-box">
+                    Привет! Можешь помочь мне найти работу учителя математики в Аркалыке с зарплатой от 200 000 тенге?
+                </div>
+            </div>
+            
+            <div class="message-wrapper bot">
+                <div class="message-box">
+                    Конечно! В нашей базе сейчас есть 2 подходящие вакансии: <br><br>
+                    1. <b>Школа №1</b> — Учитель математики (250 000 ₸)<br>
+                    2. <b>Школа №4</b> — Учитель математики (220 000 ₸)<br><br>
+                    Хотите, я покажу подробные требования по одной из них?
+                </div>
+            </div>
+        </div>
+
+        <!-- Поле ввода текста -->
+        <div class="chat-input-container">
+            <div class="chat-input-box">
+                <input type="text" id="user-input" placeholder="Напишите сообщение JOB AI..." onkeypress="handleKeyPress(event)">
+                <button class="send-btn" onclick="sendMessage()">➤</button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- СКРИПТ ДЛЯ РАБОТЫ ЧАТА -->
+    <script>
+        function sendMessage() {
+            const inputField = document.getElementById('user-input');
+            const messageText = inputField.value.trim();
+            const chatHistory = document.getElementById('chat-history');
+
+            if (messageText !== "") {
+                const userMsgHTML = `
+                    <div class="message-wrapper user">
+                        <div class="message-box">${messageText}</div>
+                    </div>
+                `;
+                chatHistory.insertAdjacentHTML('beforeend', userMsgHTML);
+                inputField.value = ''; 
+
+                chatHistory.scrollTop = chatHistory.scrollHeight;
+
+                setTimeout(() => {
+                    const botMsgHTML = `
+                        <div class="message-wrapper bot">
+                            <div class="message-box">
+                                Понял вас! Я <b>JOB AI</b> и пока работаю в демонстрационном режиме, но скоро смогу дать полный ответ на ваш запрос: <i>«${messageText}»</i>.
+                            </div>
+                        </div>
+                    `;
+                    chatHistory.insertAdjacentHTML('beforeend', botMsgHTML);
+                    chatHistory.scrollTop = chatHistory.scrollHeight; 
+                }, 1000);
+            }
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+    </script>
+</body>
+</html>

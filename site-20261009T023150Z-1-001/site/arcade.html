@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IJB Jobs - Arcade Room</title>
+    <link href="https://fonts.googleapis.com/css?family=Orbitron&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0b0f19;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            text-align: center;
+        }
+
+        /* Шапка сайта */
+        header {
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 20px 40px;
+            background-color: #0b0f19;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            color: white;
+        }
+
+        nav {
+            display: flex;
+            gap: 15px; 
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #94a3b8;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: 0.2s;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        nav a.active {
+            background-color: #5b45f4;
+            color: white;
+        }
+
+        nav a:hover {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Центральная часть с фоном из папки */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            background-image: url("retro_games-master/assets/images/retro_background.jpg");
+            background-size: cover;
+            background-position: center;
+        }
+
+        main h1 {
+            font-size: 50px;
+            margin-bottom: 30px;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            color: #fff;
+        }
+
+        main p {
+            margin: 15px 0;
+        }
+
+        main a {
+            font-size: 28px;
+            color: #38bdf8;
+            text-decoration: none;
+            transition: color 0.2s, text-shadow 0.2s;
+        }
+
+        main a:hover {
+            color: #fff;
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.8);
+        }
+
+        /* Подвал */
+        footer {
+            background-color: #05070d;
+            color: #cbd5e1;
+            padding: 30px 40px 15px 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .footer-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: left;
+        }
+
+        .footer-col {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-col h4 {
+            color: white;
+            font-size: 15px;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-col ul li a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 13px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .footer-bottom {
+            max-width: 1100px;
+            margin: 15px auto 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #94a3b8;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Шапка сайта -->
+    <header>
+        <div class="logo">IJB Jobs</div>
+        <nav>
+    <a href="home.html">Home</a>
+    <a href="work.html">Work</a>
+    <a href="jobs.html">Jobs</a>
+    <a href="arcade.html">Arcade</a>
+    <!-- Новая кнопка ИИ в шапке -->
+    <a href="ai.html" style="background-color: #5b45f4; color: white !important; font-weight: bold; border-radius: 8px; padding: 8px 16px;">AI Assistant 🤖</a>
+</nav>
+        <div class="lang-container">
+            <button class="lang-btn" style="padding: 8px 16px; background: rgba(255,255,255,0.1); border: 2px solid #5b45f4; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; font-family: 'Segoe UI', sans-serif;">РУС</button>
+        </div>
+    </header>
+
+    <!-- Центр страницы: правильные пути с учетом retro_games-master -->
+    <main>
+        <h1 style="font-size:50px;">Retro Games</h1>
+        <p><a href="retro_games-master/ping_pong/ping_pong.html">Ping Pong</a></p>
+        <p><a href="retro_games-master/snake/snake_menu.html">Snake</a></p>
+        <p><a href="retro_games-master/tetris/tetris_menu.html">Tetris</a></p>
+        <p><a href="retro_games-master/space_invaders/space_invaders_menu.html">Space Invaders</a></p>
+    </main>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <div style="font-size: 20px; font-weight: 900; letter-spacing: 1px; color: white; margin-bottom: 8px; font-family: 'Segoe UI', sans-serif;">IJB Jobs</div>
+                <p style="font-size: 13px; color: #94a3b8;">Портал по поиску работы и сотрудников в городе Аркалык.</p>
+            </div>
+            <div class="footer-col">
+                <h4>О проекте</h4>
+                <ul>
+                    <li><a href="home.html" style="font-size: 13px; color: #94a3b8;">Главная</a></li>
+                    <li><a href="work.html" style="font-size: 13px; color: #94a3b8;">Выбор роли</a></li>
+                    <li><a href="jobs.html" style="font-size: 13px; color: #94a3b8;">Каталог вакансий</a></li>
+                    <li><a href="arcade.html" style="font-size: 13px; color: #94a3b8;">Аркада</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Контакты</h4>
+                <p style="font-size: 13px; color: #94a3b8; margin-bottom: 6px;">📞 +7 (701) 123-45-67</p>
+                <p style="font-size: 13px; color: #94a3b8;">📧 support@ijb-jobs.kz</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div>© 2026 IJB Jobs. Все права защищены.</div>
+            <div style="color: #38bdf8; font-weight: 600;">Основатели: Boranbaev Ibrahim & Azhimukan Zhiger</div>
+        </div>
+    </footer>
+
+</body>
+</html>
